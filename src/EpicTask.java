@@ -1,11 +1,11 @@
-//package yandex.practicum.kanban;
+import java.util.HashMap;
 
 public class EpicTask extends Task {
+    protected HashMap<Integer, SubTask> subTasks;
 
     @Override
     public String toString() {
-        return "EpicTask = {" +
-                "title='" + title + '\'' +
+        return "{title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
                 '}';
