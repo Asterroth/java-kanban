@@ -1,3 +1,5 @@
+package yandex.practicum.kanban;
+
 import java.util.HashMap;
 
 public class Main {
@@ -13,35 +15,35 @@ public class Main {
         for (int i = 0; i < 3; i++) {
             addNewTask("Task #" + (taskManager.taskID + 1)
                     , "Description of Task #" + (taskManager.taskID + 1)
-                    , StatusList.statusNEW);
+                    , StatusList.NEW);
         }
 // Fill epic tasks
         for (int i = 0; i < 3; i++) {
             addNewEpic("Epic #" + (taskManager.taskID + 1)
                     , "Description of Epic #" + (taskManager.taskID + 1)
-                    , StatusList.statusNEW);
+                    , StatusList.NEW);
         }
 // Fill subtasks for Epic ID = 4
         for (int i = 0; i < 2; i++) {
             addNewSub(4, "Subtask #" + (taskManager.taskID + 1)
                     , "Description of Subtask #" + (taskManager.taskID + 1)
-                    , StatusList.statusNEW);
+                    , StatusList.NEW);
         }
 
 // Fill subtasks for Epic ID = 5
         for (int i = 0; i < 2; i++) {
             addNewSub(5, "Subtask #" + (taskManager.taskID + 1)
                     , "Description of Subtask #" + (taskManager.taskID + 1)
-                    , StatusList.statusDONE);
+                    , StatusList.DONE);
         }
 
 // Fill subtasks for Epic ID = 6
         addNewSub(6, "Subtask #" + (taskManager.taskID + 1)
                 , "Description of Subtask #" + (taskManager.taskID + 1)
-                , StatusList.statusNEW);
+                , StatusList.NEW);
         addNewSub(6, "Subtask #" + (taskManager.taskID + 1)
                 , "Description of Subtask #" + (taskManager.taskID + 1)
-                , StatusList.statusINP);
+                , StatusList.IN_PROGRESS);
 
         //System.out.println("\nInitial list of all created tasks:\n" + taskManager);
         System.out.println(taskList());
@@ -50,11 +52,11 @@ public class Main {
 
 
 // Update task #3
-        updateTask(3, "NewTask #3", "Description of NewTask #3", StatusList.statusINP);
+        updateTask(3, "NewTask #3", "Description of NewTask #3", StatusList.IN_PROGRESS);
 // Update epic task #6
         updateEpic(6, "NewEpicTask #6", "Description of NewEpicTask #6");
 // Update subtask #10 in epic task #5
-        updateSub(5, 10, "NewSub #10", "Description of NewSub #10", StatusList.statusINP);
+        updateSub(5, 10, "NewSub #10", "Description of NewSub #10", StatusList.IN_PROGRESS);
         System.out.println("\nTotal list of tasks after updating of task #3, epic task #6 and subtask #10:\n" + taskManager);
 // Printing of task #2, epic task #4 without and with subtasks, subtask #12
         System.out.println("\nTask #2 content:\n" + getTask(2));
@@ -79,7 +81,7 @@ public class Main {
 
     }
 
-    public static void addNewTask (String title, String description, String status) {
+    public static void addNewTask (String title, String description, StatusList status) {
         Task task = new Task();
         task.title = title;
         task.description = description;
@@ -87,7 +89,7 @@ public class Main {
         taskManager.addNewTask(task);
     }
 
-    public static void addNewEpic (String title, String description, String status) {
+    public static void addNewEpic (String title, String description, StatusList status) {
         EpicTask epicTask = new EpicTask();
         epicTask.title = title;
         epicTask.description = description;
@@ -97,7 +99,7 @@ public class Main {
         taskManager.addNewEpic(epicTask);
     }
 
-    public static void addNewSub (int epicID, String title, String description, String status) {
+    public static void addNewSub (int epicID, String title, String description, StatusList status) {
         SubTask subTask = new SubTask();
         subTask.title = title;
         subTask.description = description;
@@ -111,7 +113,7 @@ public class Main {
 
     public static String subList () { return taskManager.getSubList(); }
 
-    public static void updateTask (int ID, String title, String description, String status) {
+    public static void updateTask (int ID, String title, String description, StatusList status) {
         Task task = new Task();
         task.title = title;
         task.description = description;
@@ -132,7 +134,7 @@ public class Main {
         taskManager.updateEpic(ID, epicTask);
     }
 
-    public static void updateSub (int epicID, int subID, String title, String description, String status) {
+    public static void updateSub (int epicID, int subID, String title, String description, StatusList status) {
         SubTask subTask = new SubTask();
         subTask.title = title;
         subTask.description = description;

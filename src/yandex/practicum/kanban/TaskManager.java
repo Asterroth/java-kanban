@@ -1,3 +1,5 @@
+package yandex.practicum.kanban;
+
 import java.util.HashMap;
 
 public class TaskManager {
@@ -9,7 +11,8 @@ public class TaskManager {
     public void addNewTask (Task task) {
         if (task != null) {
             taskID++;
-            taskList.put(taskID, task);
+            task.taskID = taskID;
+            taskList.put(task.taskID, task);
         }
     }
 
@@ -17,7 +20,8 @@ public class TaskManager {
     public void addNewEpic (EpicTask epicTask) {
         if (epicTask != null) {
             taskID++;
-            epicList.put(taskID, epicTask);
+            epicTask.taskID = taskID;
+            epicList.put(epicTask.taskID, epicTask);
         }
     }
 
@@ -25,7 +29,8 @@ public class TaskManager {
     public void addNewSub (Integer epicID, SubTask subTask) {
         if (subTask != null) {
             taskID++;
-            epicList.get(epicID).subTasks.put(taskID, subTask);
+            subTask.taskID = taskID;
+            epicList.get(epicID).subTasks.put(subTask.taskID, subTask);
             epicStatus(epicID);
         }
     }
@@ -37,7 +42,7 @@ public class TaskManager {
         int newCounter = 0;
         int doneCounter = 0;
         for (Integer subID : epicList.get(epicID).subTasks.keySet()) {
-            if (epicList.get(epicID).subTasks.get(subID).status.equals("NEW")) {
+            if (epicList.get(epicID).subTasks.get(subID).status.equals(StatusList.NEW)) {
                 newCounter++;
             } else {
                 newCounter--;
@@ -47,7 +52,7 @@ public class TaskManager {
             statusNew = true;
         }
         for (Integer subID : epicList.get(epicID).subTasks.keySet()) {
-            if (epicList.get(epicID).subTasks.get(subID).status.equals("DONE")) {
+            if (epicList.get(epicID).subTasks.get(subID).status.equals(StatusList.DONE)) {
                 doneCounter++;
             } else {
                 doneCounter--;
@@ -57,11 +62,11 @@ public class TaskManager {
             statusDone = true;
         }
         if (statusNew) {
-            epicList.get(epicID).status = StatusList.statusNEW;
+            epicList.get(epicID).status = StatusList.NEW;
         } else if (statusDone) {
-            epicList.get(epicID).status = StatusList.statusDONE;
+            epicList.get(epicID).status = StatusList.DONE;
         } else {
-            epicList.get(epicID).status = StatusList.statusINP;
+            epicList.get(epicID).status = StatusList.IN_PROGRESS;
         }
     }
 
@@ -69,8 +74,8 @@ public class TaskManager {
     public String getTaskList () {
         String result = "";
         for (Integer ID : taskList.keySet()) {
-            result += "\nTask ID: " + ID
-                    + " = "
+            result += "\nTask #" + ID
+                    + ": "
                     + taskList.get(ID).toString();
         }
         return result;
@@ -80,8 +85,8 @@ public class TaskManager {
     public String getEpicList () {
         String result = "";
         for (Integer ID : epicList.keySet()) {
-            result += "\nEpic task ID: " + ID
-                    + " = "
+            result += "\nEpic task #" + ID
+                    + ": "
                     + epicList.get(ID).toString();
         }
         return result;
@@ -92,8 +97,8 @@ public class TaskManager {
         String result = "";
         for (Integer epicID : epicList.keySet()) {
             for (Integer subID : epicList.get(epicID).subTasks.keySet()) {
-                result += "\nSubtask ID: " + subID
-                        + " = "
+                result += "\nSubtask #" + subID
+                        + ": "
                         + epicList.get(epicID).subTasks.get(subID).toString();
             }
         }
@@ -103,7 +108,7 @@ public class TaskManager {
     // Updating of selected task
     public void updateTask (int ID, Task task) {
         if (taskList.containsKey(ID) && task != null) {
-            taskList.put(ID, task);
+            taskList.put(task.taskID = ID, task);
         } else {
             System.out.println("No such task ID!");
         }
@@ -112,7 +117,7 @@ public class TaskManager {
     // Updating of selected epic task
     public void updateEpic (int ID, EpicTask epicTask) {
         if (epicList.containsKey(ID) && epicTask != null) {
-            epicList.put(ID, epicTask);
+            epicList.put(epicTask.taskID = ID, epicTask);
         } else {
             System.out.println("No such epic task ID!");
         }
@@ -121,7 +126,7 @@ public class TaskManager {
     // Updating of selected subtask
     public void updateSub (int epicID, int ID, SubTask subTask) {
         if (epicList.get(epicID).subTasks.containsKey(ID) && subTask != null) {
-            epicList.get(epicID).subTasks.put(ID, subTask);
+            epicList.get(epicID).subTasks.put(subTask.taskID = ID, subTask);
             epicStatus(epicID);
         }
     }
@@ -129,7 +134,7 @@ public class TaskManager {
     // Getting of selected task
     public String getTask (int ID) {
         if (taskList.containsKey(ID)) {
-            return "Task ID = " + ID + ", " + taskList.get(ID).toString();
+            return "Task #" + ID + ", " + taskList.get(ID).toString();
         } else {
             return "No such task ID!";
         }
@@ -138,7 +143,7 @@ public class TaskManager {
     // Getting of selected epic task
     public String getEpic (int ID) {
         if (epicList.containsKey(ID)) {
-            return "Epic task ID = " + ID + ", " + epicList.get(ID).toString();
+            return "Epic task #" + ID + ", " + epicList.get(ID).toString();
         } else {
             return "No such epic task ID!";
         }
@@ -148,9 +153,9 @@ public class TaskManager {
     public String getEpicWithSubs (int ID) {
         String result = "";
         if (epicList.containsKey(ID)) {
-            result +="Epic task ID = " + ID + ", " + epicList.get(ID).toString();
+            result +="Epic task #" + ID + ", " + epicList.get(ID).toString();
             for (Integer subID : epicList.get(ID).subTasks.keySet()) {
-                result += "\n\tSubtask ID = " + subID + ", " + epicList.get(ID).subTasks.get(subID).toString();
+                result += "\n\tSubtask #" + subID + ", " + epicList.get(ID).subTasks.get(subID).toString();
             }
             return result;
         } else {
@@ -162,7 +167,7 @@ public class TaskManager {
     public String getSub (int ID) {
         for (Integer epicID : epicList.keySet()) {
             if (epicList.get(epicID).subTasks.containsKey(ID)) {
-                return "Subtask ID = " + ID + ", " + epicList.get(epicID).subTasks.get(ID).toString();
+                return "Subtask #" + ID + ", " + epicList.get(epicID).subTasks.get(ID).toString();
             }
         }
         return "No such subtask ID!";
@@ -218,12 +223,12 @@ public class TaskManager {
     public String toString() {
         String result = "{\n";
         for (Integer taskID : taskList.keySet()) {
-            result = result + "Task ID = " + taskID + ", " + taskList.get(taskID).toString() + "\n";
+            result = result + "Task #" + taskID + ": " + taskList.get(taskID).toString() + "\n";
         }
         for (Integer epicID : epicList.keySet()) {
-            result = result + "\nEpic ID = " + epicID + ", " + epicList.get(epicID).toString();
+            result = result + "\nEpic #" + epicID + ": " + epicList.get(epicID).toString();
             for (Integer subID : epicList.get(epicID).subTasks.keySet()) {
-                result += "\n\tSubtask ID = " + subID + ", " + epicList.get(epicID).subTasks.get(subID).toString();
+                result += "\n\tSubtask #" + subID + ": " + epicList.get(epicID).subTasks.get(subID).toString();
             }
         }
         return result + "\n}";
