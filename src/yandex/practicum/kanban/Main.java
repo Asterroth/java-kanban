@@ -6,43 +6,41 @@ public class Main {
     static TaskManager taskManager = new TaskManager();
 
     public static void main(String[] args) {
-        HashMap<Integer, Task> newTaskList = new HashMap<>();
-        taskManager.taskList = newTaskList;
-        HashMap<Integer, EpicTask> newEpicList = new HashMap<>();
-        taskManager.epicList = newEpicList;
+        taskManager.taskList = new HashMap<>();
+        taskManager.epicList = new HashMap<>();
 
 // Fill tasks
         for (int i = 0; i < 3; i++) {
-            addNewTask("Task #" + (taskManager.taskID + 1)
-                    , "Description of Task #" + (taskManager.taskID + 1)
+            addNewTask("Task #" + (taskManager.taskId + 1)
+                    , "Description of Task #" + (taskManager.taskId + 1)
                     , StatusList.NEW);
         }
 // Fill epic tasks
         for (int i = 0; i < 3; i++) {
-            addNewEpic("Epic #" + (taskManager.taskID + 1)
-                    , "Description of Epic #" + (taskManager.taskID + 1)
+            addNewEpic("Epic #" + (taskManager.taskId + 1)
+                    , "Description of Epic #" + (taskManager.taskId + 1)
                     , StatusList.NEW);
         }
-// Fill subtasks for Epic ID = 4
+// Fill subtasks for Epic id = 4
         for (int i = 0; i < 2; i++) {
-            addNewSub(4, "Subtask #" + (taskManager.taskID + 1)
-                    , "Description of Subtask #" + (taskManager.taskID + 1)
+            addNewSub(4, "Subtask #" + (taskManager.taskId + 1)
+                    , "Description of Subtask #" + (taskManager.taskId + 1)
                     , StatusList.NEW);
         }
 
-// Fill subtasks for Epic ID = 5
+// Fill subtasks for Epic id = 5
         for (int i = 0; i < 2; i++) {
-            addNewSub(5, "Subtask #" + (taskManager.taskID + 1)
-                    , "Description of Subtask #" + (taskManager.taskID + 1)
+            addNewSub(5, "Subtask #" + (taskManager.taskId + 1)
+                    , "Description of Subtask #" + (taskManager.taskId + 1)
                     , StatusList.DONE);
         }
 
-// Fill subtasks for Epic ID = 6
-        addNewSub(6, "Subtask #" + (taskManager.taskID + 1)
-                , "Description of Subtask #" + (taskManager.taskID + 1)
+// Fill subtasks for Epic id = 6
+        addNewSub(6, "Subtask #" + (taskManager.taskId + 1)
+                , "Description of Subtask #" + (taskManager.taskId + 1)
                 , StatusList.NEW);
-        addNewSub(6, "Subtask #" + (taskManager.taskID + 1)
-                , "Description of Subtask #" + (taskManager.taskID + 1)
+        addNewSub(6, "Subtask #" + (taskManager.taskId + 1)
+                , "Description of Subtask #" + (taskManager.taskId + 1)
                 , StatusList.IN_PROGRESS);
 
         //System.out.println("\nInitial list of all created tasks:\n" + taskManager);
@@ -99,12 +97,12 @@ public class Main {
         taskManager.addNewEpic(epicTask);
     }
 
-    public static void addNewSub (int epicID, String title, String description, StatusList status) {
+    public static void addNewSub (int epicId, String title, String description, StatusList status) {
         SubTask subTask = new SubTask();
         subTask.title = title;
         subTask.description = description;
         subTask.status = status;
-        taskManager.addNewSub(epicID, subTask);
+        taskManager.addNewSub(epicId, subTask);
     }
 
     public static String taskList () { return taskManager.getTaskList(); }
@@ -113,59 +111,59 @@ public class Main {
 
     public static String subList () { return taskManager.getSubList(); }
 
-    public static void updateTask (int ID, String title, String description, StatusList status) {
+    public static void updateTask (int id, String title, String description, StatusList status) {
         Task task = new Task();
         task.title = title;
         task.description = description;
         task.status = status;
-        taskManager.updateTask(ID, task);
+        taskManager.updateTask(id, task);
     }
 
-    public static void updateEpic (int ID, String title, String description) {
+    public static void updateEpic (int id, String title, String description) {
         EpicTask epicTask = new EpicTask();
         epicTask.title = title;
         epicTask.description = description;
-        epicTask.status = taskManager.epicList.get(ID).status;
+        epicTask.status = taskManager.epicList.get(id).status;
         HashMap<Integer, SubTask> subList = new HashMap<>();
-        for (Integer subID : taskManager.epicList.get(ID).subTasks.keySet()) {
-            subList.put(subID, taskManager.epicList.get(ID).subTasks.get(subID));
+        for (Integer subId : taskManager.epicList.get(id).subTasks.keySet()) {
+            subList.put(subId, taskManager.epicList.get(id).subTasks.get(subId));
         }
         epicTask.subTasks = subList;
-        taskManager.updateEpic(ID, epicTask);
+        taskManager.updateEpic(id, epicTask);
     }
 
-    public static void updateSub (int epicID, int subID, String title, String description, StatusList status) {
+    public static void updateSub (int epicId, int subId, String title, String description, StatusList status) {
         SubTask subTask = new SubTask();
         subTask.title = title;
         subTask.description = description;
         subTask.status = status;
-        taskManager.updateSub(epicID, subID, subTask);
+        taskManager.updateSub(epicId, subId, subTask);
     }
 
-    public static String getTask (int ID) {
-        return taskManager.getTask(ID);
+    public static String getTask (int id) {
+        return taskManager.getTask(id);
     }
 
-    public static String getEpic (int ID) {
-        return taskManager.getEpic(ID);
+    public static String getEpic (int id) {
+        return taskManager.getEpic(id);
     }
 
-    public static String getEpicAndSubs (int ID) { return taskManager.getEpicWithSubs(ID); }
+    public static String getEpicAndSubs (int id) { return taskManager.getEpicWithSubs(id); }
 
-    public static String getSub (int ID) {
-        return taskManager.getSub(ID);
+    public static String getSub (int id) {
+        return taskManager.getSub(id);
     }
 
-    public static void removeTask (int ID) {
-        taskManager.removeTask(ID);
+    public static void removeTask (int id) {
+        taskManager.removeTask(id);
     }
 
-    public static void removeEpic (int ID) {
-        taskManager.removeEpic(ID);
+    public static void removeEpic (int id) {
+        taskManager.removeEpic(id);
     }
 
-    public static void removeSub (int ID) {
-        taskManager.removeSub(ID);
+    public static void removeSub (int id) {
+        taskManager.removeSub(id);
     }
 
     public static void clearTask () { taskManager.clearTasks(); }

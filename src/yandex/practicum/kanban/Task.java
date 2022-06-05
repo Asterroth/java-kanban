@@ -1,14 +1,14 @@
 package yandex.practicum.kanban;
 
 public class Task {
-    protected Integer taskID;
+    protected Integer taskId;
     protected String title;
     protected String description;
     protected StatusList status;
 
     @Override
     public String toString() {
-        return "{taskID=" + "'" + taskID + "'" +
+        return "{taskID=" + "'" + taskId + "'" +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
