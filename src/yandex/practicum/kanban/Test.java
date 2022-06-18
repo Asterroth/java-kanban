@@ -35,13 +35,13 @@ public class Test {
         taskManager.getTask(task2.getId());  // 2
         taskManager.getTask(task3.getId());  // 3
         taskManager.getTask(task4.getId());  // 4
-        taskManager.getTask(epic1.getId());  // 5
-        taskManager.getTask(epic2.getId());  // 6
-        taskManager.getTask(subtask1.getId());  // 7
-        taskManager.getTask(subtask2.getId());  // 8
-        taskManager.getTask(subtask3.getId());  // 9
+        taskManager.getEpic(epic1.getId());  // 5
+        taskManager.getEpic(epic2.getId());  // 6
+        taskManager.getSubTask(subtask1.getId());  // 7
+        taskManager.getSubTask(subtask2.getId());  // 8
+        taskManager.getSubTask(subtask3.getId());  // 9
         taskManager.getTask(task3.getId());  // 10
-        taskManager.getTask(epic1.getId());  // 11 -> 10
+        taskManager.getEpic(epic1.getId());  // 11 -> 10
         System.out.print("History, last 10 requests:");
         System.out.println(taskManager.getHistory());
 
