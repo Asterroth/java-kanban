@@ -1,7 +1,7 @@
 package yandex.practicum.kanban;
 
-public enum StatusList {
-    NEW,
+public enum Status {
+    DONE,
     IN_PROGRESS,
-    DONE
+    NEW
 }
