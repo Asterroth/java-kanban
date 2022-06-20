@@ -1,6 +1,6 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.model;
 
-public class Subtask extends Task{
+public class Subtask extends Task {
     private int epicId;
 
     public Subtask(String title, String description, Status status, int epicId) {

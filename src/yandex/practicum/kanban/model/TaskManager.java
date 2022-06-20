@@ -1,4 +1,8 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.model;
+
+import yandex.practicum.kanban.model.Epic;
+import yandex.practicum.kanban.model.Subtask;
+import yandex.practicum.kanban.model.Task;
 
 import java.util.List;
 import java.util.Map;

@@ -1,9 +1,12 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.managers;
+
+import yandex.practicum.kanban.model.HistoryManager;
+import yandex.practicum.kanban.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryHistoryManager implements HistoryManager{
+public class InMemoryHistoryManager implements HistoryManager {
     private List<Task> history = new ArrayList<>();
 
     @Override

@@ -1,10 +1,16 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.managers;
+
+import yandex.practicum.kanban.model.Status;
+import yandex.practicum.kanban.model.Epic;
+import yandex.practicum.kanban.model.Subtask;
+import yandex.practicum.kanban.model.Task;
+import yandex.practicum.kanban.model.TaskManager;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryTaskManager implements TaskManager{
+public class InMemoryTaskManager implements TaskManager {
     private int id = 0;
     private final Map<Integer, Task> tasksMap;
     private final Map<Integer, Epic> epicsMap;
