@@ -17,7 +17,12 @@ public class InMemoryHistoryManager implements HistoryManager{
 
     @Override
     public void removeRecord(int id) {
-        history.remove(id);
+        if (history.size() > 1) {
+            history.remove(id);
+        } else {
+            history.clear();
+        }
+
     }
 
     @Override
