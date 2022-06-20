@@ -1,8 +1,8 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.model;
 
 import java.util.ArrayList;
 
-public class Epic extends Task{
+public class Epic extends Task {
     private ArrayList<Integer> subtasksId;
 
     public Epic(String title, String description) {

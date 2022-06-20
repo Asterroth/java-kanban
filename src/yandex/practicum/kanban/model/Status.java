@@ -1,4 +1,4 @@
-package yandex.practicum.kanban;
+package yandex.practicum.kanban.model;
 
 public enum Status {
     DONE,

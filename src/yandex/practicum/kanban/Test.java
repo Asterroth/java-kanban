@@ -1,5 +1,8 @@
 package yandex.practicum.kanban;
 
+import yandex.practicum.kanban.managers.Managers;
+import yandex.practicum.kanban.model.*;
+
 public class Test {
     TaskManager taskManager = Managers.getDefault();
 
