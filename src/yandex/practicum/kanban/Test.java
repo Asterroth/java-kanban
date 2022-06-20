@@ -6,6 +6,18 @@ public class Test {
     public void testing() {
         Task task1 = new Task("Important and urgent", "Do it right now!", Status.NEW);
         taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
+        taskManager.addTask(task1);
 
         Task task2 = new Task("Important and non-urgent", "Plan to do it!", Status.IN_PROGRESS);
         taskManager.addTask(task2);
@@ -32,6 +44,7 @@ public class Test {
         taskManager.addSubtask(subtask3);
 
         taskManager.getTask(task1.getId());  // 1
+        taskManager.removeTask(task1.getId());  // 1
         taskManager.getTask(task2.getId());  // 2
         taskManager.getTask(task3.getId());  // 3
         taskManager.getTask(task4.getId());  // 4
