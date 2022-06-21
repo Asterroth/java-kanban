@@ -23,6 +23,10 @@ public class Test {
         taskManager.addTask(task1);
 
         Task task2 = new Task("Important and non-urgent", "Plan to do it!", Status.IN_PROGRESS);
+        Task task22 = new Task(null, null, null);
+        taskManager.addTask(task22);
+        taskManager.getTask(100);
+        taskManager.getTask(task22.getId());
         taskManager.addTask(task2);
 
         Task task3 = new Task("Unimportant and urgent", "Delegate it!", Status.DONE);
@@ -42,7 +46,10 @@ public class Test {
 
         Epic epic2 = new Epic("Very big task", "Something very difficult");
         taskManager.addEpic(epic2);
-
+        //taskManager.addTask(epic2);
+        //taskManager.getTasksMap().clear();
+        //taskManager.getSubTasksMap().clear();
+        //taskManager.getEpicsMap().clear();
         Subtask subtask3 = new Subtask("Start doing", "Decide to start", Status.DONE, epic2.getId());
         taskManager.addSubtask(subtask3);
 
@@ -52,12 +59,22 @@ public class Test {
         taskManager.getTask(task3.getId());  // 3
         taskManager.getTask(task4.getId());  // 4
         taskManager.getEpic(epic1.getId());  // 5
+        //taskManager.removeEpic(epic1.getId());
         taskManager.getEpic(epic2.getId());  // 6
         taskManager.getSubTask(subtask1.getId());  // 7
         taskManager.getSubTask(subtask2.getId());  // 8
+        taskManager.removeSubTask(subtask2.getId());
         taskManager.getSubTask(subtask3.getId());  // 9
+        taskManager.removeSubTask(subtask3.getId());
         taskManager.getTask(task3.getId());  // 10
-        taskManager.getEpic(epic1.getId());  // 11 -> 10
+        //taskManager.getEpic(epic1.getId());  // 11 -> 10
+        taskManager.getTask(task4.getId());
+        taskManager.getTask(task4.getId());
+        taskManager.getTask(task4.getId());
+        taskManager.getTask(task4.getId());
+        taskManager.getTask(task4.getId());
+        taskManager.getTask(task3.getId());
+        taskManager.getTask(task2.getId());
         System.out.print("History, last 10 requests:");
         System.out.println(taskManager.getHistory());
 
