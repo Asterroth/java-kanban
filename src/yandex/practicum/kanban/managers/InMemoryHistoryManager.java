@@ -20,10 +20,16 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void removeRecord(int id) {
-        if (history.size() > 1) {
+        /*if (history.size() > 1) {
             history.remove(id);
         } else {
             history.clear();
+        }*/
+        for (Task task : history) {
+            if (task.getId() == id) {
+                history.remove(task);
+                return;
+            }
         }
 
     }

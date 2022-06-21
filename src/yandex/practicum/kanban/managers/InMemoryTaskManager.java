@@ -46,7 +46,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTask(int id) {
-        if (tasksMap.get(id) != null) {
+        if (tasksMap.getOrDefault(id, null) != null) {
             history.addRecord(tasksMap.get(id));
             return tasksMap.get(id);
         } else {
@@ -56,7 +56,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Epic getEpic(int id) {
-        if (epicsMap.get(id) != null) {
+        if (epicsMap.getOrDefault(id, null) != null) {
             history.addRecord(epicsMap.get(id));
             return epicsMap.get(id);
         } else {
@@ -66,7 +66,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Subtask getSubTask(int id) {
-        if (subTasksMap.get(id) != null) {
+        if (subTasksMap.getOrDefault(id, null) != null) {
             history.addRecord(subTasksMap.get(id));
             return subTasksMap.get(id);
         } else {
@@ -91,8 +91,8 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public List<Integer> getSubTaskList(int epicId) {
-        if (epicsMap.get(epicId) != null) {
-            return epicsMap.get(epicId).getSubtasksId();
+        if (epicsMap.getOrDefault(epicId, null) != null) {
+            return epicsMap.getOrDefault(epicId, null).getSubtasksId();
         } else {
             return null;
         }
@@ -146,8 +146,8 @@ public class InMemoryTaskManager implements TaskManager {
         int doneCounter = 0;
         if (getSubTaskList(id) != null) {
             for (int i = 0; i < getSubTaskList(id).size(); i++) {
-                if (subTasksMap.get(getSubTaskList(id).get(i)) != null) {
-                    if (subTasksMap.get(getSubTaskList(id).get(i)).getStatus() == Status.NEW) {
+                if (subTasksMap.getOrDefault(getSubTaskList(id).get(i), null) != null) {
+                    if (subTasksMap.getOrDefault(getSubTaskList(id).get(i), null).getStatus() == Status.NEW) {
                         newCounter++;
                     } else {
                         newCounter--;
@@ -172,7 +172,7 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeTask(int id) {
-        if (tasksMap.get(id) != null) {
+        if (tasksMap.getOrDefault(id, null) != null) {
             tasksMap.remove(id);
             history.removeRecord(id);
         }
@@ -192,9 +192,16 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void removeSubTask(int id) {
-        if (getSubTaskList(subTasksMap.get(id).getEpicId()) != null) {
-            getSubTaskList(subTasksMap.get(id).getEpicId()).remove(id);
-            updateStatusEpic(subTasksMap.get(id).getEpicId());
+        /*if (getSubTaskList(subTasksMap.getOrDefault(id, null).getEpicId()) != null) {
+            getSubTaskList(subTasksMap.getOrDefault(id, null).getEpicId()).remove(id);
+            updateStatusEpic(subTasksMap.getOrDefault(id, null).getEpicId());
+            subTasksMap.remove(id);
+            history.removeRecord(id);
+        }*/
+        if (subTasksMap.containsKey(id)) {
+            Epic epic = getEpic(subTasksMap.get(id).getEpicId());
+            epic.getSubtasksId().remove((Integer) id);
+            updateStatusEpic(epic.getId());
             subTasksMap.remove(id);
             history.removeRecord(id);
         }
