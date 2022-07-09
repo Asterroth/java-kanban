@@ -55,7 +55,6 @@ public class Test {
         //taskManager.getEpicsMap().clear();
 
         taskManager.getTask(task1.getId());  // 1
-        taskManager.removeTask(task1.getId());  // 1
         taskManager.getTask(task2.getId());  // 2
         taskManager.getTask(task3.getId());  // 3
         taskManager.getEpic(epic1.getId());  // 5
