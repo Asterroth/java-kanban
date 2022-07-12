@@ -10,8 +10,8 @@ import java.util.List;
 public class InMemoryHistoryManager implements HistoryManager {
     final HashMap<Integer, Node> recordedTasks = new HashMap<>();
 
-    public Node head;
-    public Node tail;
+    private Node head;
+    private Node tail;
 
     public void linkLast(Task element) {
         final Node oldTail = tail;
